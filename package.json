@@ -4,8 +4,9 @@
   "main": "index.js",
   "license": "MIT",
   "scripts": {
+    "start": "node --watch build/index.js",
     "dev": "nodemon src/index.ts --outfiles=dist/index.js && node dist/index.js",
-    "tsc":"tsc"
+    "build":"tsc"
   },
   "dependencies": {
     "express": "^4.19.2",
