@@ -1,0 +1,21 @@
+{
+  "name": "digiapiformat",
+  "version": "1.0.0",
+  "main": "index.js",
+  "license": "MIT",
+  "scripts": {
+    "dev": "nodemon src/index.ts --outfiles=dist/index.js && node dist/index.js",
+    "tsc":"tsc"
+  },
+  "dependencies": {
+    "express": "^4.19.2",
+    "morgan": "^1.10.0"
+  },
+  "devDependencies": {
+    "@types/express": "^4.17.21",
+    "@types/morgan": "^1.9.9",
+    "esbuild": "^0.23.0",
+    "nodemon": "^3.1.4",
+    "typescript": "^5.5.3"
+  }
+}
