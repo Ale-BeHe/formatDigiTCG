@@ -1,14 +1,19 @@
-import express from 'express';
+import express from 'express' // ESModule
+import cards from './routes/cards'
+import user from './routes/users'
 
+const app = express()
+app.use(express.json())
 
-const app = express();
-const PORT = 3000;
+const PORT = 3000
 
+app.get('/', (_req, res) => {
+  res.send('Hellos, fellas!')
+})
 
-app.get('/',(_req,res)=>{
-    res.send('Hellos, fellas!');
-});
+app.use('/api/cards', cards)
+app.use('/api/user', user)
 
-app.listen(PORT,()=>{
-    console.log(`server running at port ${PORT}`)
-});
+app.listen(PORT, () => {
+  console.log(`server running at port ${PORT}`)
+})
