@@ -4,7 +4,7 @@ import * as cardServices from '../services/cardsServices'
 const router = Router()
 
 router.get('/', (_req, res) => {
-  res.send(cardServices.getCardsWithOutUsslessInfo())
+  cardServices.getCardsWithOutUsslessInfo().then(resp => res.send(resp)).catch(err => console.log(err))
 })
 router.get('/:id', (req, res) => {
   const card = cardServices.findCardById(req.params.id)

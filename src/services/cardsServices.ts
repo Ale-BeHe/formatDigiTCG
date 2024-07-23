@@ -1,3 +1,4 @@
+import axios from 'axios'
 import cardsData from '../db/cards.json'
 import { basicInfoCard, GuessCardData, ICard } from '../types'
 // ".tsx", "ts","node", ".js",".json" auto completado extensiones en tyypescript
@@ -6,26 +7,29 @@ const cards: ICard[] = cardsData as ICard[]
 
 export const getCards = (): ICard[] => cards
 
-export const getCardsWithOutUsslessInfo = (): GuessCardData[] => {
-  return cards.map((aux) => {
-    return {
-      id: aux.id,
-      name: aux.name,
-      type: aux.type,
-      level: aux.level,
-      play_cost: aux.play_cost,
-      color: aux.color,
-      color2: aux.color2,
-      color3: '',
-      color4: '',
-      form: aux.form,
-      digi_type: aux.digi_type,
-      digi_type2: aux.digi_type2,
-      dp: aux.dp,
-      attribute: aux.attribute,
-      rarity: aux.rarity
-    }
+export const getCardsWithOutUsslessInfo = async (): Promise<GuessCardData[]> => {
+  const aux2: GuessCardData[] = await getData().then(resp => {
+    return resp.map((aux) => {
+      return {
+        id: aux.id,
+        name: aux.name,
+        type: aux.type,
+        level: aux.level != null ? aux.level : '',
+        play_cost: aux.play_cost != null ? aux.play_cost : '',
+        color: aux.color,
+        color2: aux.color2 != null ? aux.color2 : '',
+        color3: '',
+        color4: '',
+        form: aux.form != null ? aux.form : '',
+        digi_type: aux.digi_type != null ? aux.digi_type : '',
+        digi_type2: aux.digi_type2 != null ? aux.digi_type2 : '',
+        dp: aux.dp != null ? aux.dp : '',
+        attribute: aux.attribute != null ? aux.attribute : '',
+        rarity: aux.rarity
+      }
+    })
   })
+  return aux2
 }
 
 export const findCardById = (id: string): basicInfoCard | undefined => {
@@ -46,10 +50,12 @@ export const addEntry = (): string => {
   return 'string'
 }
 
-/* function filterObject<ICard, K extends keyof ICard> (obje: ICard, keys: K[]): Pick<ICard, K> {
-  return Object.fromEntries(
-    Object.entries(obje).filter(([key]) => keys.includes(key as K))
-  ) as Pick<ICard, K>
-}
+const getData = async (): Promise<ICard[]> => {
+  const response = await axios({
+    url: 'https://digimoncard.io/api-public/search.php?series=Digimon%20Card%20Game',
+    method: 'GET'
+  }).then(resp => resp.data)
 
-const filteredObj = filterObject(cards, ['name', 'id']); */
+  const data = await response
+  return data
+}

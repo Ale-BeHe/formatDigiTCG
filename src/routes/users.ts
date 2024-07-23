@@ -1,5 +1,6 @@
 import { Router } from 'express'
 import * as userServices from '../services/userServices'
+import toNewUserEntry from '../utils'
 
 const router = Router()
 
@@ -7,8 +8,17 @@ router.get('/login', (_req, res) => {
   res.send('devuelve user')
 })
 
-router.post('/singup', (_req, res) => {
-  res.send('dse registro user')
+router.post('/singup', (req, res) => {
+  try {
+    const newUserEntry = toNewUserEntry(req.body)
+    const response = userServices.addUser(newUserEntry)
+    res.send(response)
+  } catch (err) {
+    if (err instanceof Error) {
+      res.status(404).send(err.message)
+    }
+    res.sendStatus(404)
+  }
 })
 
 router.get('/', (_req, res) => {

@@ -1,5 +1,5 @@
 import userData from '../db/users.json'
-import { IUser, UserNoSensitivityInfo } from '../types'
+import { IUser, NewUser, UserNoSensitivityInfo } from '../types'
 
 const users: IUser[] = userData as IUser[] // sercion de tipo, se usa cuando no controlamos los datos que nos llega de un json de otra api
 
@@ -20,4 +20,17 @@ export const getUserById = (id: number): UserNoSensitivityInfo | undefined => {
     return userInfo
   }
   return userFilter
+}
+
+export const addUser = (newUserEntry: NewUser): IUser | undefined => {
+  try {
+    const newUser = {
+      id: Math.max(...userData.map(user => user.id)) + 1,
+      ...newUserEntry
+    }
+    userData.push(newUser)
+    return newUser
+  } catch {
+    return undefined
+  }
 }

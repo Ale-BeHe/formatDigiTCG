@@ -15,6 +15,8 @@ export interface ICard {
   xros_req: string
   color: string
   color2: string
+  color3: string
+  color4: string
   digi_type: string
   digi_type2: string
   form: string
@@ -26,7 +28,7 @@ export interface ICard {
   main_effect: string
   source_effect: string
   alt_effect: string
-  series: stirng
+  series: string
   pretty_url: string
   date_added: string
   tcgplayer_name: string
@@ -49,12 +51,25 @@ ICard, 'id' | 'name' | 'type' | 'level' |
 'attribute' | 'rarity'
 >
 
+// export type Rol = 'Root' | 'Admin' | 'Maintainer' | 'User' | 'VIPUser'
+export enum Rol {
+  Root = 'Root',
+  Admin = 'Admin',
+  Maintainer = 'Maintainer',
+  User = 'User',
+  VIPUser = 'VIPUser',
+
+}
+
 export interface IUser {
   id: number
   username: string
   email: string
   password: string
   commentary: string
+  dateRegister: string
+  rol: Rol
 }
 
 export type UserNoSensitivityInfo = Omit<IUser, 'password' | 'commentary'>
+export type NewUser = Omit<IUser, 'id'>
