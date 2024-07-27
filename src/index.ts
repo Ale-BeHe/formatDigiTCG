@@ -6,6 +6,7 @@ import path from 'path'
 import helmet from 'helmet'
 import cards from './routes/cards'
 import user from './routes/users'
+import chosecard from './routes/choseCard'
 
 const app = express()
 const accessLogStream = fs.createWriteStream(path.join(__dirname,'access.log'), { flags: 'a'})
@@ -23,6 +24,7 @@ app.get('/', (_req, res) => {
 
 app.use('/api/cards', cards)
 app.use('/api/user', user)
+app.use('/api/chosecard',chosecard)
 
 app.listen(PORT, () => {
   console.log(`server running at port ${PORT}`)

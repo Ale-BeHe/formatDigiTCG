@@ -18,7 +18,7 @@ export const getCardsWithOutUsslessInfo = async (): Promise<GuessCardData[]> => 
         play_cost: aux.play_cost != null ? aux.play_cost : '',
         color: aux.color,
         color2: aux.color2 != null ? aux.color2 : '',
-        color3: '',
+        color3: expetionsCard(aux.id),
         color4: '',
         form: aux.form != null ? aux.form : '',
         digi_type: aux.digi_type != null ? aux.digi_type : '',
@@ -58,4 +58,18 @@ const getData = async (): Promise<ICard[]> => {
 
   const data = await response
   return data
+}
+
+const expetionsCard = (id:string):string=>{
+  
+  if(id==='EX7-037' || id==='BT16-102'){
+    return 'Black'
+  }
+  else if(id==='EX7-074'){
+    return 'Purple'
+  }
+  else{
+    return ''
+  }
+
 }

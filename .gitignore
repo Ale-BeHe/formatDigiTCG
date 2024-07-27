@@ -3,4 +3,4 @@ README.txt
 build/
 node_modules/
 src/db/
-access.log
+src/access.log
