@@ -1,6 +1,6 @@
-import { Router } from 'express'
+/* import { Router } from 'express'
 import * as userServices from '../services/userServices'
-import toNewUserEntry from '../utils'
+import toNewUserEntry from '../utils/utils'
 
 const router = Router()
 
@@ -31,3 +31,4 @@ router.get('/:id', (req, res) => {
 })
 
 export default router
+ */

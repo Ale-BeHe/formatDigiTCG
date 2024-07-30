@@ -1,14 +1,9 @@
-import axios from 'axios'
-import cardsData from '../db/cards.json'
-import { basicInfoCard, GuessCardData, ICard } from '../types'
+import { getAllCardFromDigimonApi, getCardByIdFromDigimonApi } from '../config/digimonApi'
+import { basicInfoCard, GuessCardData } from '../types'
 // ".tsx", "ts","node", ".js",".json" auto completado extensiones en tyypescript
 
-const cards: ICard[] = cardsData as ICard[]
-
-export const getCards = (): ICard[] => cards
-
 export const getCardsWithOutUsslessInfo = async (): Promise<GuessCardData[]> => {
-  const aux2: GuessCardData[] = await getData().then(resp => {
+  const cards: GuessCardData[] = await getAllCardFromDigimonApi().then(resp => {
     return resp.map((aux) => {
       return {
         id: aux.id,
@@ -29,47 +24,25 @@ export const getCardsWithOutUsslessInfo = async (): Promise<GuessCardData[]> => 
       }
     })
   })
-  return aux2
+  return cards
 }
 
-export const findCardById = (id: string): basicInfoCard | undefined => {
-  const filter = cardsData.find(card => card.id === id)
-
-  if (filter !== undefined) {
-    const aux = {
-      id: filter.id,
-      name: filter.name
+export const findCardById = async (id: string): Promise<basicInfoCard> => {
+  const resp: basicInfoCard = await getCardByIdFromDigimonApi(id).then(resp => {
+    return {
+      id: resp.id,
+      name: resp.name
     }
-    return aux
-  }
-
-  return filter
+  })
+  return resp
 }
 
-export const addEntry = (): string => {
-  return 'string'
-}
-
-const getData = async (): Promise<ICard[]> => {
-  const response = await axios({
-    url: 'https://digimoncard.io/api-public/search.php?series=Digimon%20Card%20Game',
-    method: 'GET'
-  }).then(resp => resp.data)
-
-  const data = await response
-  return data
-}
-
-const expetionsCard = (id:string):string=>{
-  
-  if(id==='EX7-037' || id==='BT16-102'){
+export const expetionsCard = (id: string): string => {
+  if (id === 'EX7-037' || id === 'BT16-102') {
     return 'Black'
-  }
-  else if(id==='EX7-074'){
+  } else if (id === 'EX7-074') {
     return 'Purple'
-  }
-  else{
+  } else {
     return ''
   }
-
 }

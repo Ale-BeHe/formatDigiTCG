@@ -51,6 +51,18 @@ ICard, 'id' | 'name' | 'type' | 'level' |
 'attribute' | 'rarity'
 >
 
+export interface ICardSimpleFormat {
+  cardnumber: string
+  name: string
+}
+
+export type GuessCardDataSecret = Pick<
+ICard, 'id' | 'name' | 'type' | 'level' |
+'play_cost' | 'color' | 'color2' | 'color3' |
+'color4' | 'form' | 'digi_type' | 'digi_type2' | 'dp' |
+'attribute' | 'rarity' | 'date_added'
+>
+
 // export type Rol = 'Root' | 'Admin' | 'Maintainer' | 'User' | 'VIPUser'
 export enum Rol {
   Root = 'Root',

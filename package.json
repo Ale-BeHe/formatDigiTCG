@@ -4,9 +4,9 @@
   "main": "index.js",
   "license": "MIT",
   "scripts": {
-    "start": "node --watch build/index.js",
+    "start": "node --envfile .env --watch build/index.js",
     "lint": "ts-standard",
-    "dev": "nodemon src/index.ts --outfiles=dist/index.js && node dist/index.js",
+    "dev": "nodemon",
     "build": "tsc"
   },
   "dependencies": {
@@ -14,17 +14,17 @@
     "cors": "^2.8.5",
     "express": "^4.19.2",
     "helmet": "^7.1.0",
-    "mongodb": "^6.8.0",
+    "mongoose": "^8.5.1",
     "morgan": "^1.10.0",
     "node-cron": "^3.0.3"
   },
   "devDependencies": {
     "@types/cors": "^2.8.17",
     "@types/express": "^4.17.21",
-    "@types/mongodb": "^4.0.7",
     "@types/morgan": "^1.9.9",
     "@types/node-cron": "^3.0.11",
     "esbuild": "^0.23.0",
+    "esbuild-register": "^3.6.0",
     "nodemon": "^3.1.4",
     "ts-standard": "^12.0.2",
     "typescript": "^5.5.3"
