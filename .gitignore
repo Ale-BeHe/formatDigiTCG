@@ -1,6 +1,6 @@
-.development.env
+src/access.log
+.env.development
 README.txt
 build/
 node_modules/
 src/db/
-src/access.log

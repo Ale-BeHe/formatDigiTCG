@@ -1,4 +1,4 @@
-import { NewUser, Rol } from './types'
+import { NewUser, Rol } from '../types'
 
 const parseName = (nameFromRequest: any, field: string): string => {
   if (!isString(nameFromRequest)) {
